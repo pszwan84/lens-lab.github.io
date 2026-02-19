@@ -1,12 +1,21 @@
 'use client';
 
 import { Settings } from 'lucide-react';
+import UserMenu from './UserMenu';
 
-interface HeaderProps {
-    onOpenSettings: () => void;
+interface UserInfo {
+    username: string;
+    email: string;
+    isAdmin: boolean;
 }
 
-export default function Header({ onOpenSettings }: HeaderProps) {
+interface HeaderProps {
+    user?: UserInfo | null;
+    onOpenSettings: () => void;
+    onLogout?: () => void;
+}
+
+export default function Header({ user, onOpenSettings, onLogout }: HeaderProps) {
     return (
         <header className="w-full px-6 py-4 flex items-center justify-between">
             {/* Logo */}
@@ -22,14 +31,22 @@ export default function Header({ onOpenSettings }: HeaderProps) {
                 </span>
             </div>
 
-            {/* Settings */}
-            <button
-                onClick={onOpenSettings}
-                className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/40 hover:text-white/70 transition-all"
-                title="API Settings"
-            >
-                <Settings className="w-4 h-4" />
-            </button>
+            {/* User Menu or Settings */}
+            {user ? (
+                <UserMenu
+                    user={user}
+                    onOpenSettings={onOpenSettings}
+                    onLogout={onLogout || (() => { })}
+                />
+            ) : (
+                <button
+                    onClick={onOpenSettings}
+                    className="p-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white/40 hover:text-white/70 transition-all"
+                    title="API Settings"
+                >
+                    <Settings className="w-4 h-4" />
+                </button>
+            )}
         </header>
     );
 }
