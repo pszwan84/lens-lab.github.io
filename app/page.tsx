@@ -16,7 +16,7 @@ function getApiConfig() {
   if (typeof window === 'undefined') return null;
   const baseUrl = localStorage.getItem('lenslab_api_base_url');
   const apiKey = localStorage.getItem('lenslab_api_key');
-  const model = localStorage.getItem('lenslab_model') || 'gemini-3-pro-image-1x1';
+  const model = localStorage.getItem('lenslab_model') || 'gemini-2.0-flash-exp';
   if (!baseUrl || !apiKey) return null;
   return { baseUrl, apiKey, model };
 }

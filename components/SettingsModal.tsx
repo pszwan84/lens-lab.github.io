@@ -21,7 +21,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
         if (isOpen) {
             setBaseUrl(localStorage.getItem('lenslab_api_base_url') || '');
             setApiKey(localStorage.getItem('lenslab_api_key') || '');
-            setModel(localStorage.getItem('lenslab_model') || 'gemini-3-pro-image-1x1');
+            setModel(localStorage.getItem('lenslab_model') || 'gemini-2.0-flash-exp');
             setSaved(false);
         }
     }, [isOpen]);
@@ -70,16 +70,10 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                             {/* Body */}
                             <div className="px-6 py-5 space-y-4">
                                 {/* Help text */}
-                                <div className="text-xs text-white/40 bg-white/[0.03] rounded-xl p-3 border border-white/[0.06]">
-                                    <p>需要 OpenAI 兼容的 API 端点（如本地代理或 API 中转服务）。</p>
-                                    <a
-                                        href="https://ai.google.dev/gemini-api/docs"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 mt-1"
-                                    >
-                                        获取 Gemini API Key <ExternalLink className="w-3 h-3" />
-                                    </a>
+                                <div className="text-xs text-white/40 bg-white/[0.03] rounded-xl p-3 border border-white/[0.06] space-y-1">
+                                    <p>使用 Google AI Studio 的免费 API Key 即可体验。</p>
+                                    <p>① <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 inline-flex items-center gap-1">前往获取免费 API Key <ExternalLink className="w-3 h-3" /></a></p>
+                                    <p>② 将下方端点和 Key 填入，点击保存即可</p>
                                 </div>
 
                                 {/* API Base URL */}
@@ -91,7 +85,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                         type="url"
                                         value={baseUrl}
                                         onChange={(e) => setBaseUrl(e.target.value)}
-                                        placeholder="http://127.0.0.1:8045/v1"
+                                        placeholder="https://generativelanguage.googleapis.com/v1beta/openai"
                                         className="w-full px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white/90 placeholder:text-white/20 focus:outline-none focus:border-purple-500/40 focus:ring-1 focus:ring-purple-500/20 transition-all"
                                     />
                                 </div>
@@ -127,7 +121,7 @@ export default function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                                         type="text"
                                         value={model}
                                         onChange={(e) => setModel(e.target.value)}
-                                        placeholder="gemini-3-pro-image-1x1"
+                                        placeholder="gemini-2.0-flash-exp"
                                         className="w-full px-3 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-sm text-white/90 placeholder:text-white/20 focus:outline-none focus:border-purple-500/40 focus:ring-1 focus:ring-purple-500/20 transition-all"
                                     />
                                 </div>
